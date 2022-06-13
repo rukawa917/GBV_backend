@@ -42,8 +42,9 @@ pool_abi = json.loads('[{"inputs":[],"stateMutability":"nonpayable","type":"cons
 # contract
 master_chef_contract = web3.eth.contract(address=master_chef_address, abi=master_chef_abi)
 
+# total allocation point
 total_alloc_point = master_chef_contract.functions.totalAllocPoint().call()
-pool_length = master_chef_contract.functions.poolLength().call()
+# pool_length = master_chef_contract.functions.poolLength().call()
 
 sushi_usdc_pool_contract = web3.eth.contract(address=sushi_usdc_pool_address, abi = pool_abi)
 reserve_info = sushi_usdc_pool_contract.functions.getReserves().call()
@@ -73,9 +74,11 @@ pool_contract = web3.eth.contract(address=pool_address, abi=pool_abi)
 
 # sushi reward per block
 total_sushi_per_block = master_chef_contract.functions.sushiPerBlock().call()
-pool_weight = pool_alloc_point / total_alloc_point
 
+# weight of the pool (how much sushi this pool gets out of total sushi per block)
+pool_weight = pool_alloc_point / total_alloc_point
 pool_sushi_per_block = total_sushi_per_block * pool_weight / 1e18
+
 # token0_contract = web3.eth.contract(address=token0_address, abi=ERC20_abi)
 # token1_contract = web3.eth.contract(address=token1_address, abi=ERC20_abi)
 # print(token0_contract.functions.symbol().call())
