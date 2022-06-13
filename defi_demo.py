@@ -95,5 +95,6 @@ weth_usdc_price = usdc_reserve * 1e18 / (weth_reserve + 1e18)
 tvl_usdc = (weth_reserve/1e18 * weth_usdc_price + usdc_reserve) / 1e6
 
 # assume 6000 blocks per day
+# calculate APR with respect to total value of the pool (TVL) in usdc
 interest_rate = (pool_sushi_per_block * 6000 * 365 * sushi_usdc_price / tvl_usdc) * 100
 print(interest_rate)
